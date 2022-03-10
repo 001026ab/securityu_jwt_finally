@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.HashMap;
+
 @Data
 public class JwtTokenUtils {
     public static final String TOKEN_HEADER = "Authorization";
@@ -18,7 +19,7 @@ public class JwtTokenUtils {
     private static final String SECRET = "5eb4x7dpl";
 
     // 创建token
-    public static String createToken(String username,Object role) {
+    public static String createToken(String username, Object role) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("role", role);
         return Jwts.builder()
@@ -32,12 +33,19 @@ public class JwtTokenUtils {
     }
 
     // 从token中获取用户名
-    public static String getUsername(String token){
+    public static String getUsername(String token) {
         return getTokenBody(token).getSubject();
     }
 
     // 获取用户角色
-    public static String getUserRole(String token){
+
+    /**
+     * 如果需要从token中获取用户权限，要注意要修改返回类型，因为token中保存的是一个list
+     *
+     * @param token
+     * @return
+     */
+    public static String getUserRole(String token) {
         return (String) getTokenBody(token).get("role");
     }
 
@@ -50,7 +58,7 @@ public class JwtTokenUtils {
         }
     }
 
-    private static Claims getTokenBody(String token){
+    private static Claims getTokenBody(String token) {
         return Jwts.parser()
                 .setSigningKey(JwtTokenUtils.SECRET)
                 .parseClaimsJws(token)
