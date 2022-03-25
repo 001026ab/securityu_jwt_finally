@@ -13,7 +13,7 @@ https://github.com/echisan/springboot-jwt-demo/blob/master/blog_content.md
 复制消息头的token
 
 访问swagger
-http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-_ui_.html
 测试带token不带token访问接口结果
 ![img_1.png](img_1.png)
 
@@ -21,5 +21,7 @@ http://localhost:8080/swagger-ui.html
 该接口只允许管理员访问 
 修改数据库用户角色为ROLE_ADMIN
 使用PostMan重新获得token测试即可访问
+
+多权限之间用逗号(,)隔开
 
 
